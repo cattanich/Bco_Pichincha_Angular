@@ -34,10 +34,10 @@
           </div>
           <div class="col name-col">{{ product.name }}</div>
           <div class="col desc-col">{{ product.description }}</div>
-          <div class="col date-col">{{ product.date_release | date:'dd/MM/yyyy' }}</div>
-          <div class="col date-col">{{ product.date_revision | date:'dd/MM/yyyy' }}</div>
+          <div class="col date-col">{{ product.date_release | dateFormat }}</div>
+          <div class="col date-col">{{ product.date_revision | dateFormat }}</div>
           <div class="col actions-col">
-            <button class="menu-button">
+            <button class="menu-button" [appDropdown]="'show'">
               <span class="dots">⋮</span>
               <div class="dropdown-menu">
                 <a [routerLink]="['/products/edit', product.id]">Editar</a>
@@ -68,3 +68,5 @@
   (cancel)="closeDeleteModal()" 
   (confirm)="confirmDelete()">
 </app-product-delete-modal>
+
+<app-loading [isLoading]="isLoading"></app-loading>

@@ -15,9 +15,19 @@ export class DropdownDirective {
     
     if (dropdown) {
       if (this.isOpen) {
-        dropdown.classList.add(this.appDropdown);
+        // Verificar que appDropdown no esté vacío
+        if (this.appDropdown && this.appDropdown.trim() !== '') {
+          dropdown.classList.add(this.appDropdown);
+        } else {
+          dropdown.classList.add('show'); // Valor por defecto
+        }
       } else {
-        dropdown.classList.remove(this.appDropdown);
+        // Verificar que appDropdown no esté vacío
+        if (this.appDropdown && this.appDropdown.trim() !== '') {
+          dropdown.classList.remove(this.appDropdown);
+        } else {
+          dropdown.classList.remove('show'); // Valor por defecto
+        }
       }
     }
   }
@@ -28,7 +38,12 @@ export class DropdownDirective {
       const dropdown = this.el.nativeElement.querySelector('.dropdown-menu');
       
       if (dropdown) {
-        dropdown.classList.remove(this.appDropdown);
+        // Verificar que appDropdown no esté vacío
+        if (this.appDropdown && this.appDropdown.trim() !== '') {
+          dropdown.classList.remove(this.appDropdown);
+        } else {
+          dropdown.classList.remove('show'); // Valor por defecto
+        }
       }
     }
   }

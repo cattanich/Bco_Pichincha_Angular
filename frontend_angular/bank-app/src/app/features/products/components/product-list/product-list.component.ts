@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   resultsPerPage = 5;
   showDeleteModal = false;
   productToDelete: Product | null = null;
+  isLoading = false;
 
   constructor(private productService: ProductService) { }
 
@@ -23,13 +24,16 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
+    this.isLoading = true;
     this.productService.getProducts().subscribe({
       next: (response) => {
         this.products = response.data;
         this.applyFilters();
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading products', error);
+        this.isLoading = false;
       }
     });
   }
@@ -71,14 +75,17 @@ export class ProductListComponent implements OnInit {
 
   confirmDelete(): void {
     if (this.productToDelete) {
+      this.isLoading = true;
       this.productService.deleteProduct(this.productToDelete.id).subscribe({
         next: () => {
           this.loadProducts();
           this.closeDeleteModal();
+          this.isLoading = false;
         },
         error: (error) => {
           console.error('Error deleting product', error);
           this.closeDeleteModal();
+          this.isLoading = false;
         }
       });
     }

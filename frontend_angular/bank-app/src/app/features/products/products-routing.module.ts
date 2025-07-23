@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { UnsavedChangesGuard } from '../../core/guards/unsaved-changes.guard';
 
 const routes: Routes = [
   {
@@ -10,11 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    component: ProductFormComponent
+    component: ProductFormComponent,
+    canDeactivate: [UnsavedChangesGuard]
   },
   {
     path: 'edit/:id',
-    component: ProductFormComponent
+    component: ProductFormComponent,
+    canDeactivate: [UnsavedChangesGuard]
   }
 ];
 

@@ -95,6 +95,7 @@
               formControlName="date_revision"
               class="form-control"
               [ngClass]="{'error': formSubmitted && productForm.get('date_revision')?.errors}"
+              readonly
             >
             <div class="error-message" *ngIf="formSubmitted && productForm.get('date_revision')?.errors">
               <span *ngIf="productForm.get('date_revision')?.errors?.['required']">Este campo es requerido!</span>
@@ -110,3 +111,5 @@
     </div>
   </div>
 </div>
+
+<app-loading [isLoading]="isLoading"></app-loading>
