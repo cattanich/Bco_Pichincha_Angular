@@ -1,156 +1,113 @@
-# Aplicación de Gestión de Productos Financieros
+# Aplicación de Gestión de Productos Financieros Bancarios
 
 Creado por Christian Cattani
 
 ## Descripción
 
-Esta aplicación web desarrollada con Angular permite la gestión completa de productos financieros bancarios. Implementa un CRUD (Crear, Leer, Actualizar, Eliminar) completo con validaciones avanzadas y una interfaz de usuario moderna e intuitiva.
+Esta aplicación permite administrar productos financieros de un banco mediante una interfaz web desarrollada con Angular. Proporciona funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) completas, con un diseño intuitivo y moderno que sigue las especificaciones del ejercicio técnico.
 
-## Características
+## Características Principales
 
-- **Listado de productos financieros**: Visualización de productos con paginación
-- **Búsqueda de productos**: Filtrado en tiempo real
-- **Control de registros por página**: Selector para mostrar 5, 10 o 20 registros
-- **Formulario de creación/edición**: Con validaciones en tiempo real
-- **Eliminación de productos**: Mediante confirmación modal
-- **Validaciones avanzadas**: 
-  - ID único (verificación con el backend)
-  - Fechas de liberación y revisión (con cálculo automático)
-  - Campos requeridos con longitudes mínimas y máximas
-- **Notificaciones**: Sistema de notificaciones para feedback al usuario
-- **Responsive Design**: Adaptación a diferentes tamaños de pantalla
-- **Manejo de errores**: Interceptores HTTP para manejo de errores
+- **Listado de productos financieros** (F1): Vista principal con tabla de productos
+- **Búsqueda por texto** (F2): Filtrado en tiempo real de productos
+- **Selector de registros por página** (F3): Opción de mostrar 5, 10 o 20 registros
+- **Formulario de registro/edición** (F4/F5): Con validaciones completas según requerimientos
+- **Funcionalidad de eliminación** (F6): Con modal de confirmación
+- **Sistema de notificaciones**: Feedback visual al usuario sobre operaciones
+- **Manejo de errores**: Visualización de errores en formularios y operaciones
+- **Diseño responsive**: Adaptación a diferentes dispositivos
 
-## Mejoras Implementadas
+## Tecnologías Utilizadas
 
-1. **Sistema de notificaciones**: Componente reutilizable para mostrar mensajes de éxito, error, información y advertencia
-2. **Interceptor HTTP**: Manejo centralizado de errores en peticiones HTTP
-3. **Guardias de navegación**: Prevención de pérdida de datos al abandonar formularios sin guardar
-4. **Mejora en el menú desplegable**: Implementación robusta para evitar problemas de interacción
-5. **Visualización de logos**: Fallback a primera letra del nombre cuando no hay logo
-6. **Validación avanzada de formularios**: Mensajes específicos para cada tipo de error
-7. **Botones contextuales**: Cambios en texto y comportamiento según el contexto
-8. **Carga asíncrona de módulos**: Implementación de lazy loading para mejor rendimiento
-9. **Estructura optimizada del proyecto**: Organización modular según buenas prácticas
-10. **Implementación CORS**: Configuración del backend para permitir peticiones desde el frontend
+- Angular 14+
+- TypeScript 4.8+
+- SCSS para estilos
+- Jest para pruebas unitarias
+- RxJS para programación reactiva
 
-## Estructura de Carpetas
+## Estructura del Proyecto
 
 ```
 bank-app/
 ├── src/
 │   ├── app/
-│   │   ├── core/                     # Servicios y modelos principales
-│   │   │   ├── guards/               # Guardias de navegación
-│   │   │   ├── interceptors/         # Interceptores HTTP
-│   │   │   ├── models/               # Interfaces y modelos
-│   │   │   └── services/             # Servicios (API, notificaciones)
-│   │   │       └── validators/       # Validadores personalizados
+│   │   ├── core/                # Núcleo de la aplicación
+│   │   │   ├── guards/          # Protección de rutas
+│   │   │   ├── interceptors/    # Interceptores HTTP
+│   │   │   ├── models/          # Interfaces y modelos
+│   │   │   └── services/        # Servicios y lógica de negocio
 │   │   │
-│   │   ├── features/                 # Módulos de funcionalidades
-│   │   │   └── products/             # Módulo de productos
-│   │   │       ├── components/       # Componentes específicos
-│   │   │       │   ├── product-list/
-│   │   │       │   ├── product-form/
-│   │   │       │   └── product-delete-modal/
-│   │   │       └── products.module.ts
+│   │   ├── features/            # Módulos de funcionalidades
+│   │   │   └── products/        # Gestión de productos
 │   │   │
-│   │   ├── shared/                   # Elementos compartidos
-│   │   │   ├── components/           # Componentes reutilizables
-│   │   │   │   ├── loading/
-│   │   │   │   ├── error-message/
-│   │   │   │   └── notification/
-│   │   │   ├── directives/           # Directivas personalizadas
-│   │   │   └── pipes/                # Pipes personalizados
+│   │   ├── shared/              # Componentes y utilidades compartidas
+│   │   │   ├── components/      # Componentes reutilizables
+│   │   │   ├── directives/      # Directivas personalizadas
+│   │   │   └── pipes/           # Pipes para transformación de datos
 │   │   │
-│   │   ├── app.component.ts          # Componente principal
-│   │   ├── app.routes.ts             # Configuración de rutas
-│   │   └── app.config.ts             # Configuración de la aplicación
+│   │   └── app.*               # Componente principal y configuración
 │   │
-│   ├── assets/                       # Recursos estáticos
-│   │   ├── images/
-│   │   └── styles/                   # Estilos globales
-│   │
-│   ├── environments/                 # Configuraciones por entorno
-│   └── styles.scss                   # Estilos globales
+│   ├── assets/                  # Recursos estáticos
+│   └── styles.scss              # Estilos globales
 │
-├── jest.config.js                    # Configuración de pruebas
-├── package.json                      # Dependencias y scripts
-└── tsconfig.json                     # Configuración de TypeScript
+└── tests/                       # Pruebas unitarias
 ```
 
-## Guía de Instalación
+## Guía de Instalación y Ejecución
 
 ### Requisitos Previos
 
 - Node.js 14.x o superior
 - Angular CLI 14.x o superior
-- Backend de productos financieros corriendo en http://localhost:3002
+- Backend de productos financieros (incluido en repo-interview-main)
 
-### Pasos de Instalación
+### Instalación
 
-1. **Clonar el repositorio**
+1. **Configurar el backend**
+
    ```bash
-   git clone <url-del-repositorio>
-   cd frontend_angular/bank-app
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Iniciar el backend**
-   ```bash
-   # En una terminal separada, navegar al directorio del backend
-   cd ../../repo-interview-main
+   cd /ruta/al/repo-interview-main
    npm install
    npm run start:dev
    ```
 
-4. **Iniciar la aplicación Angular**
+   El backend estará disponible en http://localhost:3002
+
+2. **Instalar y ejecutar el frontend**
+
    ```bash
-   # Volver al directorio de la aplicación Angular
-   cd ../frontend_angular/bank-app
+   cd /ruta/al/frontend_angular/bank-app
+   npm install
    npm start
    ```
 
-5. **Acceder a la aplicación**
-   - Abrir el navegador en http://localhost:4200
+   La aplicación estará disponible en http://localhost:4200
 
 ### Ejecución de Pruebas
 
 ```bash
-# Ejecutar pruebas unitarias
 npm test
-
-# Generar informe de cobertura
 npm run test:coverage
 ```
 
-## Tecnologías Utilizadas
-
-- **Angular 14+**: Framework principal
-- **TypeScript 4.8+**: Lenguaje de programación
-- **SCSS**: Preprocesador CSS
-- **Jest**: Framework de pruebas unitarias
-- **RxJS**: Biblioteca para programación reactiva
-- **Angular Router**: Gestión de rutas y navegación
-
 ## Buenas Prácticas Implementadas
 
-- **Clean Code**: Nomenclatura clara y descriptiva
-- **SOLID**: Principios de diseño de software orientado a objetos
-- **DRY (Don't Repeat Yourself)**: Código modular y reutilizable
-- **Lazy Loading**: Carga bajo demanda de módulos
-- **Reactive Forms**: Formularios reactivos con validaciones avanzadas
-- **Manejo de Errores**: Tratamiento centralizado de errores
-- **Tipado estricto**: Uso extensivo de interfaces para mayor seguridad
+- **Arquitectura modular**: Separación clara de responsabilidades
+- **Principios SOLID**: Diseño orientado a objetos mantenible
+- **Clean Code**: Código legible y bien estructurado
+- **Lazy Loading**: Carga optimizada de módulos
+- **Manejo de errores**: Tratamiento centralizado de excepciones
+- **Pruebas unitarias**: Cobertura superior al 70%
 
-## Pendientes/Mejoras Futuras
+## Mejoras Realizadas
 
-- Implementación de pruebas e2e con Cypress
-- Dockerización de la aplicación
-- Implementación de i18n para múltiples idiomas
-- Implementación de temas claros/oscuros
-- Integración con sistemas de autenticación
+1. **Sistema de notificaciones**: Feedback visual para acciones del usuario
+2. **Corrección CORS**: Configuración para conectar frontend y backend
+3. **Manejo de menús desplegables**: Mejora en la interacción de los menús
+4. **Visualización de logos**: Mostrar inicial del nombre cuando no hay logo
+5. **Mejora en la UI/UX**: Botones contextuales e indicadores visuales claros
+6. **Prevención de pérdida de datos**: Confirmación al abandonar formularios con cambios
+
+## Licencia
+
+Este proyecto es parte de un ejercicio técnico y no está destinado para uso en producción.
