@@ -22,8 +22,8 @@ Esta aplicación permite administrar productos financieros de un banco mediante 
 - Angular 17.3+
 - TypeScript 5.4+
 - SCSS para estilos
-- Jest para pruebas unitarias
 - RxJS para programación reactiva
+- Karma y Jasmine para pruebas unitarias
 
 ## Estructura del Proyecto
 
@@ -39,6 +39,8 @@ bank-app/
 │   │   │
 │   │   ├── features/            # Módulos de funcionalidades
 │   │   │   └── products/        # Gestión de productos
+│   │   │       ├── components/  # Componentes de productos
+│   │   │       └── products.module.ts
 │   │   │
 │   │   ├── shared/              # Componentes y utilidades compartidas
 │   │   │   ├── components/      # Componentes reutilizables
@@ -49,9 +51,6 @@ bank-app/
 │   │
 │   ├── assets/                  # Recursos estáticos
 │   └── styles.scss              # Estilos globales
-│
-├── jest.config.js               # Configuración de pruebas
-└── setup-jest.ts                # Configuración para Jest
 ```
 
 ## Guía de Instalación y Ejecución
@@ -87,14 +86,8 @@ bank-app/
 ### Ejecución de Pruebas
 
 ```bash
-# Ejecutar pruebas
-npm test
-
-# Ejecutar pruebas con cobertura
-npm run test:coverage
-
-# Ejecutar pruebas en modo watch
-npm run test:watch
+# Ejecutar pruebas unitarias con Karma
+ng test
 ```
 
 ## Buenas Prácticas Implementadas
@@ -104,7 +97,7 @@ npm run test:watch
 - **Clean Code**: Código legible y bien estructurado
 - **Lazy Loading**: Carga optimizada de módulos
 - **Manejo de errores**: Tratamiento centralizado de excepciones
-- **Pruebas unitarias**: Cobertura superior al 70%
+- **Validaciones avanzadas**: Verificación de reglas de negocio
 
 ## Mejoras Realizadas
 
