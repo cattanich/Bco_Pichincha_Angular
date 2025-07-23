@@ -108,6 +108,4 @@ ng test
 5. **Mejora en la UI/UX**: Botones contextuales e indicadores visuales claros
 6. **Prevención de pérdida de datos**: Confirmación al abandonar formularios con cambios
 
-## Licencia
 
-Este proyecto es parte de un ejercicio técnico y no está destinado para uso en producción.
