@@ -9,7 +9,7 @@ Esta aplicación permite administrar productos financieros de un banco mediante 
 ## Características Principales
 
 - **Listado de productos financieros** (F1): Vista principal con tabla de productos
-- **Búsqueda por texto** (F2): Filtrado en tiempo real de productos
+- **Búsqueda por texto** (F2): Filtrado en tiempo real de productos 
 - **Selector de registros por página** (F3): Opción de mostrar 5, 10 o 20 registros
 - **Formulario de registro/edición** (F4/F5): Con validaciones completas según requerimientos
 - **Funcionalidad de eliminación** (F6): Con modal de confirmación
