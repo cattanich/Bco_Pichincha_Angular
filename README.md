@@ -9,7 +9,7 @@ Esta aplicación permite administrar productos financieros de un banco mediante 
 ## Características Principales
 
 - **Listado de productos financieros** (F1): Vista principal con tabla de productos
-- **Búsqueda por texto** (F2): Filtrado en tiempo real de productos 
+- **Búsqueda por texto** (F2): Filtrado en tiempo real de productos
 - **Selector de registros por página** (F3): Opción de mostrar 5, 10 o 20 registros
 - **Formulario de registro/edición** (F4/F5): Con validaciones completas según requerimientos
 - **Funcionalidad de eliminación** (F6): Con modal de confirmación
@@ -19,11 +19,11 @@ Esta aplicación permite administrar productos financieros de un banco mediante 
 
 ## Tecnologías Utilizadas
 
-- Angular 14+
-- TypeScript 4.8+
+- Angular 17.3+
+- TypeScript 5.4+
 - SCSS para estilos
-- Jest para pruebas unitarias
 - RxJS para programación reactiva
+- Karma y Jasmine para pruebas unitarias
 
 ## Estructura del Proyecto
 
@@ -39,6 +39,8 @@ bank-app/
 │   │   │
 │   │   ├── features/            # Módulos de funcionalidades
 │   │   │   └── products/        # Gestión de productos
+│   │   │       ├── components/  # Componentes de productos
+│   │   │       └── products.module.ts
 │   │   │
 │   │   ├── shared/              # Componentes y utilidades compartidas
 │   │   │   ├── components/      # Componentes reutilizables
@@ -49,8 +51,6 @@ bank-app/
 │   │
 │   ├── assets/                  # Recursos estáticos
 │   └── styles.scss              # Estilos globales
-│
-└── tests/                       # Pruebas unitarias
 ```
 
 ## Guía de Instalación y Ejecución
@@ -58,7 +58,7 @@ bank-app/
 ### Requisitos Previos
 
 - Node.js 14.x o superior
-- Angular CLI 14.x o superior
+- Angular CLI 17.3+
 - Backend de productos financieros (incluido en repo-interview-main)
 
 ### Instalación
@@ -86,8 +86,8 @@ bank-app/
 ### Ejecución de Pruebas
 
 ```bash
-npm test
-npm run test:coverage
+# Ejecutar pruebas unitarias con Karma
+ng test
 ```
 
 ## Buenas Prácticas Implementadas
@@ -97,7 +97,7 @@ npm run test:coverage
 - **Clean Code**: Código legible y bien estructurado
 - **Lazy Loading**: Carga optimizada de módulos
 - **Manejo de errores**: Tratamiento centralizado de excepciones
-- **Pruebas unitarias**: Cobertura superior al 70%
+- **Validaciones avanzadas**: Verificación de reglas de negocio
 
 ## Mejoras Realizadas
 
@@ -108,6 +108,4 @@ npm run test:coverage
 5. **Mejora en la UI/UX**: Botones contextuales e indicadores visuales claros
 6. **Prevención de pérdida de datos**: Confirmación al abandonar formularios con cambios
 
-## Licencia
 
-Este proyecto es parte de un ejercicio técnico y no está destinado para uso en producción.
