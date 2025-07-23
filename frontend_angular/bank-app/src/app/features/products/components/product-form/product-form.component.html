@@ -1,11 +1,11 @@
 <div class="container">
   <header class="header">
-    <div class="logo">BANCO</div>
+    <div class="logo">BANCO PICHINCHA</div>
   </header>
 
   <div class="content">
     <div class="form-container">
-      <h2 class="form-title">Formulario de Registro</h2>
+      <h2 class="form-title">{{ isEditMode ? 'Editar Producto' : 'Formulario de Registro' }}</h2>
 
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group">
@@ -104,8 +104,8 @@
         </div>
 
         <div class="form-actions">
-          <button type="button" class="btn-reset" (click)="resetForm()">Reiniciar</button>
-          <button type="submit" class="btn-submit">Enviar</button>
+          <button type="button" class="btn-reset" [disabled]="isEditMode" (click)="resetForm()">Reiniciar</button>
+          <button type="submit" class="btn-submit">{{ isEditMode ? 'Actualizar' : 'Enviar' }}</button>
         </div>
       </form>
     </div>

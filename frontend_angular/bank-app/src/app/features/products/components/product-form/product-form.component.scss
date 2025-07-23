@@ -90,8 +90,13 @@
     cursor: pointer;
     font-weight: bold;
     
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: #dee2e6;
+    }
+    
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
   

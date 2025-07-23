@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" (click)="closeDropdowns($event)">
   <header class="header">
-    <div class="logo">BANCO</div>
+    <div class="logo">BANCO PICHINCHA</div>
   </header>
 
   <div class="content">
@@ -30,20 +30,27 @@
       <div class="table-body">
         <div class="table-row" *ngFor="let product of filteredProducts | slice:0:resultsPerPage">
           <div class="col logo-col">
-            <img [src]="product.logo" alt="Product logo" class="product-logo">
+            <div class="product-logo">
+              <img *ngIf="product.logo && product.logo.trim() !== ''" [src]="product.logo" alt="">
+              <span *ngIf="!product.logo || product.logo.trim() === ''" class="logo-text">
+                {{ product.name.charAt(0).toUpperCase() }}
+              </span>
+            </div>
           </div>
           <div class="col name-col">{{ product.name }}</div>
           <div class="col desc-col">{{ product.description }}</div>
           <div class="col date-col">{{ product.date_release | dateFormat }}</div>
           <div class="col date-col">{{ product.date_revision | dateFormat }}</div>
           <div class="col actions-col">
-            <button class="menu-button" [appDropdown]="'show'">
-              <span class="dots">⋮</span>
-              <div class="dropdown-menu">
+            <div class="dropdown-container">
+              <button class="menu-button" (click)="toggleDropdown(product.id, $event)">
+                <span class="dots">⋮</span>
+              </button>
+              <div class="dropdown-menu" [class.show]="openDropdownId === product.id">
                 <a [routerLink]="['/products/edit', product.id]">Editar</a>
-                <a (click)="openDeleteModal(product)">Eliminar</a>
+                <a (click)="openDeleteModal(product, $event)">Eliminar</a>
               </div>
-            </button>
+            </div>
           </div>
         </div>
       </div>

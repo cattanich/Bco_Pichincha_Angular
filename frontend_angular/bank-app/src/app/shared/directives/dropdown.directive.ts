@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appDropdown]'
@@ -7,9 +7,10 @@ export class DropdownDirective {
   @Input() appDropdown: string = 'show';
   private isOpen = false;
   
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
   
-  @HostListener('click') toggleOpen() {
+  @HostListener('click', ['$event']) toggleOpen(event: Event) {
+    event.stopPropagation();
     this.isOpen = !this.isOpen;
     const dropdown = this.el.nativeElement.querySelector('.dropdown-menu');
     
@@ -33,6 +34,7 @@ export class DropdownDirective {
   }
   
   @HostListener('document:click', ['$event']) onDocumentClick(event: Event) {
+    // Solo cerramos el menú si se hace clic fuera del elemento y sus hijos
     if (!this.el.nativeElement.contains(event.target)) {
       this.isOpen = false;
       const dropdown = this.el.nativeElement.querySelector('.dropdown-menu');

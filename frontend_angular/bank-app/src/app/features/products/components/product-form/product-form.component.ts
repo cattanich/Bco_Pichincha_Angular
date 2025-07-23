@@ -6,6 +6,7 @@ import { Product } from '../../../../core/models/product.interface';
 import { CustomValidators } from '../../../../core/services/validators/custom-validators';
 import { CanComponentDeactivate } from '../../../../core/guards/unsaved-changes.guard';
 import { Observable } from 'rxjs';
+import { NotificationService } from '../../../../core/services/notification/notification.service';
 
 @Component({
   selector: 'app-product-form',
@@ -24,7 +25,8 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     private fb: FormBuilder,
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -93,12 +95,14 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
           this.productForm.patchValue(formattedProduct);
           this.formChanged = false;
         } else {
+          this.notificationService.showError('Producto no encontrado');
           this.router.navigate(['/products']);
         }
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading product', error);
+        this.notificationService.showError('Error al cargar el producto: ' + (error.message || 'Error desconocido'));
         this.router.navigate(['/products']);
         this.isLoading = false;
       }
@@ -109,6 +113,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     this.formSubmitted = true;
     
     if (this.productForm.invalid) {
+      this.notificationService.showWarning('Por favor, corrija los errores del formulario antes de continuar');
       return;
     }
     
@@ -127,12 +132,14 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
             this.productForm.get('id')?.setErrors({ idExists: true });
             this.isLoading = false;
             this.formSubmitted = false;
+            this.notificationService.showWarning('El ID ya existe, por favor utilice otro');
           } else {
             this.saveProduct(formData);
           }
         },
         error: (error) => {
           console.error('Error verifying ID', error);
+          this.notificationService.showError('Error al verificar el ID: ' + (error.message || 'Error desconocido'));
           this.isLoading = false;
           this.formSubmitted = false;
         }
@@ -149,11 +156,13 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     request$.subscribe({
       next: () => {
         this.formChanged = false;
+        this.notificationService.showSuccess(this.isEditMode ? 'Producto actualizado con éxito' : 'Producto creado con éxito');
         this.router.navigate(['/products']);
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error saving product', error);
+        this.notificationService.showError('Error al guardar el producto: ' + (error.message || 'Error desconocido'));
         this.isLoading = false;
         this.formSubmitted = false;
       }
@@ -167,6 +176,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     } else {
       this.productForm.reset();
       this.formChanged = false;
+      this.notificationService.showInfo('Formulario reiniciado');
     }
   }
 }

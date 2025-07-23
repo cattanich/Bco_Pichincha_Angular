@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../../core/models/product.interface';
 import { ProductService } from '../../../../core/services/product.service';
+import { NotificationService } from '../../../../core/services/notification/notification.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,8 +17,14 @@ export class ProductListComponent implements OnInit {
   showDeleteModal = false;
   productToDelete: Product | null = null;
   isLoading = false;
+  
+  // Track which dropdown is open
+  openDropdownId: string | null = null;
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -33,6 +40,7 @@ export class ProductListComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading products', error);
+        this.notificationService.showError('Error al cargar los productos: ' + (error.message || 'Error desconocido'));
         this.isLoading = false;
       }
     });
@@ -63,9 +71,28 @@ export class ProductListComponent implements OnInit {
     this.resultsPerPage = parseInt(select.value, 10);
   }
 
-  openDeleteModal(product: Product): void {
+  // Toggle dropdown menu
+  toggleDropdown(productId: string, event: MouseEvent): void {
+    event.stopPropagation();
+    if (this.openDropdownId === productId) {
+      this.openDropdownId = null;
+    } else {
+      this.openDropdownId = productId;
+    }
+  }
+
+  // Close dropdown when clicking outside
+  closeDropdowns(event: MouseEvent): void {
+    if (!(event.target as HTMLElement).closest('.dropdown-container')) {
+      this.openDropdownId = null;
+    }
+  }
+
+  openDeleteModal(product: Product, event: MouseEvent): void {
+    event.stopPropagation();
     this.productToDelete = product;
     this.showDeleteModal = true;
+    this.openDropdownId = null;
   }
 
   closeDeleteModal(): void {
@@ -81,9 +108,11 @@ export class ProductListComponent implements OnInit {
           this.loadProducts();
           this.closeDeleteModal();
           this.isLoading = false;
+          this.notificationService.showSuccess('Producto eliminado con éxito');
         },
         error: (error) => {
           console.error('Error deleting product', error);
+          this.notificationService.showError('Error al eliminar el producto: ' + (error.message || 'Error desconocido'));
           this.closeDeleteModal();
           this.isLoading = false;
         }

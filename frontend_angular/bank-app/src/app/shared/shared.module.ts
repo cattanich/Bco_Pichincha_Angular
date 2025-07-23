@@ -6,6 +6,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { HoverEffectDirective } from './directives/hover-effect.directive';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { HoverEffectDirective } from './directives/hover-effect.directive';
     DateFormatPipe,
     LoadingComponent,
     ErrorMessageComponent,
-    HoverEffectDirective
+    HoverEffectDirective,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { HoverEffectDirective } from './directives/hover-effect.directive';
     DateFormatPipe,
     LoadingComponent,
     ErrorMessageComponent,
-    HoverEffectDirective
+    HoverEffectDirective,
+    NotificationComponent
   ]
 })
 export class SharedModule { }
