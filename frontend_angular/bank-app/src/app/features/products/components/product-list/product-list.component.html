@@ -1,0 +1,70 @@
+<div class="container">
+  <header class="header">
+    <div class="logo">BANCO</div>
+  </header>
+
+  <div class="content">
+    <div class="search-container">
+      <input 
+        type="text" 
+        placeholder="Search..." 
+        [(ngModel)]="searchTerm" 
+        (input)="onSearch()"
+        class="search-input"
+      >
+      <div class="add-button-container">
+        <button class="add-button" [routerLink]="['/products/add']">Agregar</button>
+      </div>
+    </div>
+
+    <div class="products-table">
+      <div class="table-header">
+        <div class="col logo-col">Logo</div>
+        <div class="col name-col">Nombre del producto</div>
+        <div class="col desc-col">Descripción</div>
+        <div class="col date-col">Fecha de liberación</div>
+        <div class="col date-col">Fecha de reestructuración</div>
+        <div class="col actions-col"></div>
+      </div>
+
+      <div class="table-body">
+        <div class="table-row" *ngFor="let product of filteredProducts | slice:0:resultsPerPage">
+          <div class="col logo-col">
+            <img [src]="product.logo" alt="Product logo" class="product-logo">
+          </div>
+          <div class="col name-col">{{ product.name }}</div>
+          <div class="col desc-col">{{ product.description }}</div>
+          <div class="col date-col">{{ product.date_release | date:'dd/MM/yyyy' }}</div>
+          <div class="col date-col">{{ product.date_revision | date:'dd/MM/yyyy' }}</div>
+          <div class="col actions-col">
+            <button class="menu-button">
+              <span class="dots">⋮</span>
+              <div class="dropdown-menu">
+                <a [routerLink]="['/products/edit', product.id]">Editar</a>
+                <a (click)="openDeleteModal(product)">Eliminar</a>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-footer">
+      <div class="results-count">{{ totalResults }} resultados</div>
+      <div class="results-per-page">
+        <select (change)="onResultsPerPageChange($event)" [ngModel]="resultsPerPage">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-product-delete-modal 
+  *ngIf="showDeleteModal" 
+  [product]="productToDelete" 
+  (cancel)="closeDeleteModal()" 
+  (confirm)="confirmDelete()">
+</app-product-delete-modal>

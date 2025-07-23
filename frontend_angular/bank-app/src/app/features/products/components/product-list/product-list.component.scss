@@ -1,0 +1,167 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0056b3;
+  }
+}
+
+.content {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  .add-button {
+    background-color: #ffd966;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    
+    &:hover {
+      background-color: #f0c64a;
+    }
+  }
+}
+
+.products-table {
+  width: 100%;
+  margin-bottom: 20px;
+  
+  .table-header {
+    display: flex;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px 0;
+    font-weight: bold;
+  }
+  
+  .table-body {
+    .table-row {
+      display: flex;
+      border-bottom: 1px solid #dee2e6;
+      padding: 15px 0;
+      
+      &:hover {
+        background-color: #f1f3f5;
+      }
+    }
+  }
+  
+  .col {
+    padding: 0 10px;
+  }
+  
+  .logo-col {
+    width: 60px;
+    
+    .product-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e9ecef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .name-col {
+    width: 20%;
+  }
+  
+  .desc-col {
+    width: 30%;
+  }
+  
+  .date-col {
+    width: 15%;
+  }
+  
+  .actions-col {
+    width: 5%;
+    position: relative;
+    
+    .menu-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      
+      .dots {
+        font-size: 20px;
+        line-height: 20px;
+      }
+      
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: white;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      z-index: 10;
+      width: 120px;
+      
+      a {
+        display: block;
+        padding: 8px 12px;
+        text-decoration: none;
+        color: #212529;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: #f1f3f5;
+        }
+      }
+    }
+  }
+}
+
+.results-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .results-count {
+    font-size: 14px;
+  }
+  
+  .results-per-page {
+    select {
+      padding: 5px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+    }
+  }
+}
